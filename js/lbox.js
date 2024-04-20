@@ -31,8 +31,28 @@
         });
     }
 
+    function human_timeleft(time) {
+        const secs_day = 24 * 60 * 60;
+        var days = 0;
+        var str = "";
+        if (time < 0) {
+            time = -time;
+            str += "overdue ";
+        }
+        if (time > secs_day) {
+            days = Math.floor(time / secs_day);
+            time -= days*secs_day;
+        }
+        if (days > 0) {
+            str += days + " days ";
+        }
+        var hours = new Date(time * 1000).toISOString().slice(11, 19);
+        str += hours;
+        return str;
+    }
+
     function create_file_element(filename, size, timeleft) {
-        const strtimeleft = new Date(timeleft * 1000).toISOString().slice(11,19);
+        const strtimeleft = human_timeleft(timeleft);
         var filediv = document.createElement("tr");
         var filepart = document.createElement("td");
         filepart.classList.add("filepart");
@@ -52,7 +72,6 @@
 
     function show_error(err) {
         var container = document.getElementsByClassName("container")[0];
-
         container.innerText(err);
     }
 
