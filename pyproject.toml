@@ -17,7 +17,7 @@ build-backend = "setuptools.build_meta"
 packages = ["lbox"]
 
 [project.scripts]
-lbox = "lbox.lbox:main"
+lbox = "lbox.webapp:main"
 expirator = "lbox.expirator:main"
 
 [tool.setuptools.dynamic]
