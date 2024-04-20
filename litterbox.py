@@ -95,6 +95,11 @@ def sendjs(filename):
     jspath = lbox.config["mainconfig"]["webapp"]["js"]
     return bottle.static_file(filename, root=jspath)
 
+@lbox.get("/favicon.ico")
+def favicon():
+    htmlpath = lbox.config["mainconfig"]["webapp"]["html"]
+    return bottle.static_file("favicon-32x32.png", root=htmlpath)
+
 @lbox.get("/")
 def mainpage():
     return sendhtml("index.html")
@@ -107,7 +112,7 @@ def main(argv=None):
     cp.read(opts.config)
     lbox.config["mainconfig"] = cp
     log = logging_setup(lbox.config, LOGGER)
-    bottle.run(app=lbox, host="0.0.0.0", port=8080)
+    bottle.run(app=lbox, server='bjoern', host="0.0.0.0", port=8080)
 
 if __name__ == "__main__":
     main()
