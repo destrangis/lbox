@@ -5,7 +5,7 @@ import os
 import re
 from configparser import ConfigParser
 
-from common import to_seconds, expiration_pattern, logging_setup
+from .common import to_seconds, expiration_pattern, logging_setup
 
 LOGGER = "EXPIRATOR"
 

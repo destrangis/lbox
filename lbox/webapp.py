@@ -9,7 +9,7 @@ from configparser import ConfigParser
 
 import bottle
 
-from common import expiration_pattern, to_seconds, logging_setup
+from .common import expiration_pattern, to_seconds, logging_setup
 
 LOGGER = "LBOX"
 
