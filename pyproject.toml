@@ -7,14 +7,18 @@ authors = [
     ]
 dynamic = [ "version" ]
 dependencies = [ "bottle", "bjoern" ]
-requires-python = ">= 3.8"
+requires-python = ">= 3.10"
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["lbox"]
+#packages = ["lbox"]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
 
 [project.scripts]
 lbox = "lbox.webapp:main"
@@ -22,3 +26,6 @@ expirator = "lbox.expirator:main"
 
 [tool.setuptools.dynamic]
 version = {attr = "lbox.__version__"}
+
+[tool.setuptools.package-data]
+"*" = [ "*.html", "*.js", "*.css", "*.png" ]

@@ -6,6 +6,7 @@ import time
 import argparse
 from datetime import timedelta
 from configparser import ConfigParser
+from importlib.resources import files, as_file
 
 import bottle
 
@@ -80,29 +81,30 @@ def list():
         filelst.append( (filename, size, time_left) )
     return dict(files=sorted(filelst))
 
+def send_resource(resdir, filename):
+    f = files("lbox.appfiles").joinpath(resdir, filename)
+    with as_file(f) as fpath:
+        return bottle.static_file(fpath.name, root=str(fpath.parent))
+
 @lbox.get("/css/<filename>")
 def sendcss(filename):
-    csspath = lbox.config["mainconfig"]["webapp"]["css"]
-    return bottle.static_file(filename, root=csspath)
+    return send_resource("css", filename)
 
 @lbox.get("/html/<filename>")
 def sendhtml(filename):
-    htmlpath = lbox.config["mainconfig"]["webapp"]["html"]
-    return bottle.static_file(filename, root=htmlpath)
+    return send_resource("html", filename)
 
 @lbox.get("/js/<filename>")
 def sendjs(filename):
-    jspath = lbox.config["mainconfig"]["webapp"]["js"]
-    return bottle.static_file(filename, root=jspath)
+    return send_resource("js", filename)
 
 @lbox.get("/favicon.ico")
 def favicon():
-    htmlpath = lbox.config["mainconfig"]["webapp"]["html"]
-    return bottle.static_file("favicon-32x32.png", root=htmlpath)
+    return send_resource("html", "favicon-32x32.png")
 
 @lbox.get("/")
 def mainpage():
-    return sendhtml("index.html")
+    return send_resource("html", "index.html")
 
 def main(argv=None):
     if argv is None:
