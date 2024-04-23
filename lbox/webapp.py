@@ -11,6 +11,7 @@ from importlib.resources import files, as_file
 import bottle
 
 from .common import expiration_pattern, to_seconds, logging_setup
+from . import version
 
 LOGGER = "LBOX"
 
@@ -102,6 +103,10 @@ def sendjs(filename):
 def favicon():
     return send_resource("html", "favicon-32x32.png")
 
+@lbox.get("/version")
+def get_version():
+    return dict(version=version());
+
 @lbox.get("/")
 def mainpage():
     return send_resource("html", "index.html")
@@ -115,6 +120,7 @@ def main(argv=None):
     lbox.config["mainconfig"] = cp
     log = logging_setup(lbox.config, LOGGER)
     bottle.run(app=lbox, server='bjoern', host="0.0.0.0", port=8080)
+    #bottle.run(app=lbox, host="0.0.0.0", port=8080)
 
 if __name__ == "__main__":
     main()
