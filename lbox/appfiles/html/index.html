@@ -3,19 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Lbox</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/lbox.js"></script>
   </head>
   <body>
-    <div id="header">
-        <span id="title">Lbox</span>
-        <span id="userarea"></span>
-    </div>
-    <div class="container">
-        <div class="workarea">
-            <h2>Available files</h2>
-            <table class="filelist"></table>
-        </div>
-    <div>
+    <header>
+        <h1 id="title">Lbox</h1>
+        <p id="userarea">Files with temporary availability.</p>
+    </header>
+    <main>
+        <div class="container">
+            <div class="workarea">
+                <h3>Available files</h3>
+                <table class="filelist"></table>
+            </div>
+        <div>
+    </main>
+    <footer>
+        lbox version <span id="version"></span>
+    </footer>
   </body>
 </html>

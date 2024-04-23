@@ -1,3 +1,4 @@
+/*
 body {
     background: #eee;
     font-family: "arial", "helvetica", "sans-serif";
@@ -36,6 +37,7 @@ button:hover {
     width: 75%;
     margin: 5px;
 }
+
 #loginarea {
 }
 
@@ -57,8 +59,10 @@ button:hover {
    font-size: medium;
    padding-right: 2em;
 }
+*/
 #mainarea {
 }
+
 
 #errorarea {
     color: white;

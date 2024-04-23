@@ -77,6 +77,14 @@
 
     window.onload = async function() {
         var filelistarea = document.getElementsByClassName("filelist")[0];
+        var version_elm = document.getElementById("version")
+
+        try {
+            var version = await request("GET", "/version");
+            version_elm.innerText = version.version;
+        } catch(err) {
+            version_elm.innerText = "-";
+        };
 
         try {
             var filelist = await request("GET", "/file/");
