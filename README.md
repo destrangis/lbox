@@ -63,14 +63,7 @@ Mind that `expirator`checks the modification time of the file to decide if it ne
 
 The `lbox`command is the web server that _publishes_  the files. It will just provide a list of the files along with its size and the time to expiration. Every file can be downloaded from the url ending in `/file/<filename>`, with no additional directory path. No, the server doesn't allow uploading new files, but what's the need for it? Being self hosted, you can always `scp`into the right directories to share.
 
-The lbox server runs by default on port 8080 and needs the following entries on the configuration file:
-
-    [webapp]
-    html = /var/www/lbox/html
-    css = /var/www/lbox/css
-    js = /var/www/lbox/js
-
-which tell `lbox`where to find the static components. This entries will be ignored by `expirator`so that the same configuration file can be used.
+The lbox server runs by default on port 8080 and needs the same configuration file as the `expirator` utility.
 
 To run `lbox`use the command:
 
