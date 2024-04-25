@@ -11,6 +11,7 @@ from importlib.resources import files, as_file
 import bottle
 
 from .common import expiration_pattern, to_seconds, logging_setup
+from .expirator import ExpireTask
 from . import version
 
 LOGGER = "LBOX"
@@ -119,6 +120,7 @@ def main(argv=None):
     cp.read(opts.config)
     lbox.config["mainconfig"] = cp
     log = logging_setup(lbox.config, LOGGER)
+    ExpireTask(cp, logger=log).go()
     bottle.run(app=lbox, server='bjoern', host="0.0.0.0", port=8080)
     #bottle.run(app=lbox, host="0.0.0.0", port=8080)
 

@@ -1,6 +1,6 @@
 [project]
 name = "lbox"
-description = "Litterbox clone-ish"
+description = "Serve files via HTTP for a set duration of time."
 readme = "README.md"
 authors = [
     { name = "Javier Llopis", email = "javier@llopis.me" }
@@ -14,7 +14,6 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-#packages = ["lbox"]
 include-package-data = true
 
 [tool.setuptools.packages.find]
@@ -22,7 +21,6 @@ where = ["."]
 
 [project.scripts]
 lbox = "lbox.webapp:main"
-expirator = "lbox.expirator:main"
 
 [tool.setuptools.dynamic]
 version = {attr = "lbox.__version__"}

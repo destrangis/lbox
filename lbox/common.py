@@ -18,7 +18,7 @@ def logging_setup(config, logger):
                 "stdout": {
                     "class": "logging.StreamHandler",
                     "level": "INFO",
-                    "stream": "ext://sys.stdout"
+                    "stream": "ext://sys.stderr"
                     },
                 },
             "loggers": {logger: {"level": "DEBUG", "handlers": ["stdout"]}}
