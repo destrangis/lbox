@@ -53,14 +53,16 @@
 
     function create_file_element(filename, size, timeleft) {
         const strtimeleft = human_timeleft(timeleft);
-        var filediv = document.createElement("tr");
-        var filepart = document.createElement("td");
+        var filediv = document.createElement("div");
+        filediv.classList.add("filerow");
+        var filepart = document.createElement("div");
         filepart.classList.add("filepart");
         filepart.innerHTML = '<a href="/file/' + filename + '">' + filename + '</a>';
-        var sizepart = document.createElement("td");
+        var sizepart = document.createElement("div");
+        sizepart.classList.add("sizepart");
         sizepart.innerText = size;
-        var ttlpart = document.createElement("td");
-        //ttlpart.classList.add("ttlpart");
+        var ttlpart = document.createElement("div");
+        ttlpart.classList.add("ttlpart");
         ttlpart.innerText = strtimeleft;
         if (timeleft < 300)
             ttlpart.classList.add("expiring");
