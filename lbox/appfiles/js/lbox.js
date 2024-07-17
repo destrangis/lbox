@@ -77,7 +77,26 @@
         container.innerText(err);
     }
 
+    async function display_files(filelistarea) {
+        try {
+            var filelist = await request("GET", "/file/");
+        } catch (err) {
+            show_error(err);
+            return;
+        }
+
+        filelistarea.textContent = '';
+        for (const f of filelist.files) {
+            var filename = f[0];
+            var size = f[1];
+            var timeleft = f[2];
+            var element = create_file_element(filename, size, timeleft);
+            filelistarea.append(element);
+        }
+    }
+
     window.onload = async function() {
+        const delay = 10000;  // 10 sec delay
         var filelistarea = document.getElementsByClassName("filelist")[0];
         var version_elm = document.getElementById("version")
 
@@ -88,20 +107,8 @@
             version_elm.innerText = "-";
         };
 
-        try {
-            var filelist = await request("GET", "/file/");
-        } catch (err) {
-            show_error(err);
-            return;
-        }
-
-        for (const f of filelist.files) {
-            var filename = f[0];
-            var size = f[1];
-            var timeleft = f[2];
-            var element = create_file_element(filename, size, timeleft);
-            filelistarea.append(element);
-        }
+        display_files(filelistarea);
+        setInterval(display_files, delay, filelistarea);
 
     };
 
