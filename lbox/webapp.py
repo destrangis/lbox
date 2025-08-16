@@ -116,6 +116,11 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
     opts = cli_options(argv)
+    confpath = pathlib.Path(opts.config)
+    if not confpath.is_file():
+        print(f"ERROR: {confpath} not found. Exiting", file=sys.stderr)
+        return 1
+
     cp = ConfigParser()
     cp.read(opts.config)
     lbox.config["mainconfig"] = cp
