@@ -12,7 +12,12 @@ def to_seconds(num, timeunits):
         return num;
     return num * multiplier
 
-def logging_setup(config, logger):
+
+# def dirscan(directory: pahtlib.Path, ) -> Any:
+    # pass
+
+
+def logging_setup(logger):
     cfg = { "version": 1,
             "handlers": {
                 "stdout": {
@@ -23,16 +28,12 @@ def logging_setup(config, logger):
                 },
             "loggers": {logger: {"level": "DEBUG", "handlers": ["stdout"]}}
             }
-    try:
-        cfg.update(config.get("logging_config", {}))
-    except NoSectionError:
-        pass
 
     try:
         logging.config.dictConfig(cfg)
     except (ValueError, TypeError, AttributeError, ImportError):
         log = logging.getLogger(__file__)
-        log.error("Could not configure logging.", exc_info=True)
+        log.warning("Could not configure logging.", exc_info=True)
         return log
 
     log = logging.getLogger(logger)
